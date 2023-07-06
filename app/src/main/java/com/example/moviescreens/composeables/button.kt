@@ -1,57 +1,27 @@
 package com.example.moviescreens.composeables
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moviescreens.R
-
-@Composable
- fun ButtonUnselected() {
-    Button(
-        onClick = { /*TODO*/ },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent,
-        ),
-        modifier = Modifier
-            .padding(bottom = 16.dp)
-            .border(
-                width = 1.dp,
-                color = Color.DarkGray,
-                shape = CircleShape
-            )
-    ) {
-        Text(text = "Now Showing", color = Color.White)
-    }
-}
-
-
-@Composable
-fun ButtonSelected() {
-    Button(
-        onClick = { /*TODO*/ },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFFF4500)
-        ),
-        modifier = Modifier
-            .padding(bottom = 16.dp)
-    ) {
-        Text(text = "Now Showing", color = Color.White)
-    }
-}
-
 
 
 @Composable
@@ -96,3 +66,38 @@ fun GenreButton() {
 }
 
 
+
+
+@Composable
+fun TopChips(
+    text: String,
+    isSelected: Boolean = false,
+    onSelectedChipChanged: Boolean.() -> Unit,
+) {
+    Surface(
+        modifier = Modifier.padding(end = 8.dp),
+        shadowElevation = 0.dp,
+        shape = MaterialTheme.shapes.extraLarge,
+        color = if (isSelected) Transparent else Color(0xFFFA1616),
+        border = if (isSelected) BorderStroke(width = 1.dp, color = LightGray) else BorderStroke(width = 0.dp, color = Transparent)
+    ) {
+        Row(
+            modifier = Modifier
+                .toggleable(
+                    value = isSelected,
+                    onValueChange = {
+                        onSelectedChipChanged(isSelected)
+                    }
+                )
+        ) {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White,
+                fontWeight = FontWeight.Medium,
+                fontSize = 18.sp,
+                modifier = Modifier.padding(12.dp)
+            )
+        }
+    }
+}
