@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">movieScreens</string>
+    <string name="clock">2h 23m</string>
+    <string name="clock_icon">clock</string>
+    <string name="fantastic_beasts_the_secrets_of_dumbledore">Fantastic Beasts: The Secrets of Dumbledore</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="action">Action</string>
+    <string name="fantastic_beasts_is_a_film_series_directed_by_david_yates_and_a_spin_off_prequel_to_the_harry_potter_novel_and_film_series_the_series_is_distributed_by_warner_bros_and_consists_of_three_fantasy_films_as_of_2022">Fantastic Beasts is a film series directed by David Yates, and a spin-off prequel to the Harry Potter novel and film series. The series is distributed by Warner Bros. and consists of three fantasy films as of 2022,</string>
+    <string name="play">play</string>
+    <string name="booking">Booking</string>
+    <string name="action_text">Action</string>
+    <string name="rottentomatoes">RottenTomatoes</string>
+    <string name="imbd">IMBD</string>
+    <string name="ign">IGN</string>
+    <string name="_63">63%</string>
+    <string name="_10">10</string>
+    <string name="_6_4">6.4/</string>
+</resources>
