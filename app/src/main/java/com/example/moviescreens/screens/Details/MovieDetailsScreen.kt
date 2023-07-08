@@ -237,17 +237,6 @@ fun MovieDetailsScreen() {
                 }
             }
         }
-
-        val fakeImages = listOf(
-            R.drawable.prince,
-            R.drawable.images,
-            R.drawable.images,
-            R.drawable.prince,
-            R.drawable.catchme,
-            R.drawable.prince,
-            R.drawable.prince,
-        )
-
         Spacer(modifier = Modifier.padding(12.dp))
         FakeImageList(fakeImages = fakeImages)
         Spacer(modifier = Modifier.padding(12.dp))
@@ -278,3 +267,13 @@ fun MovieDetailsScreen() {
         }
     }
 }
+
+val fakeImages = listOf(
+    R.drawable.prince,
+    R.drawable.images,
+    R.drawable.images,
+    R.drawable.prince,
+    R.drawable.catchme,
+    R.drawable.prince,
+    R.drawable.prince,
+)
