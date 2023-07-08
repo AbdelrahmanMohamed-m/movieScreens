@@ -1,6 +1,7 @@
 package com.example.moviescreens.screens
 
 import FakeImageRow
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,13 +16,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,21 +37,19 @@ import androidx.compose.ui.unit.sp
 import card
 import com.example.moviescreens.R
 import com.example.moviescreens.composeables.blurredIcon
+
 @Preview
 @Composable
 fun MovieDetailsScreen() {
-    Column(
-        Modifier
-            .fillMaxSize()
-            .background(color = Color.White)
-    ) {
+    card()
 
+    Column(modifier = Modifier.fillMaxSize())
+    {
         Box(
-            Modifier
-                .weight(0.4f)
-        )
-        {
-            card()
+            modifier = Modifier
+                .weight(0.3f)
+                .fillMaxWidth()
+        ) {
             blurredIcon(icon = R.drawable.vector)
             Box(
                 modifier = Modifier
@@ -97,45 +100,75 @@ fun MovieDetailsScreen() {
                 )
             }
         }
-        Ratings()
-        RatingSitesTitles()
-        Spacer(modifier = Modifier.padding(12.dp))
-        Text(
-            text = stringResource(R.string.fantastic_beasts_the_secrets_of_dumbledore),
-            fontSize = 24.sp,
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.padding(12.dp))
-        Chips()
-        Spacer(modifier = Modifier.padding(12.dp))
-        FakeImageRow(fakeImages = fakeImages)
-        Spacer(modifier = Modifier.padding(12.dp))
-        Text(
-            text = stringResource(R.string.fantastic_beasts_is_a_film_series_directed_by_david_yates_and_a_spin_off_prequel_to_the_harry_potter_novel_and_film_series_the_series_is_distributed_by_warner_bros_and_consists_of_three_fantasy_films_as_of_2022),
-            fontSize = 12.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
-        Spacer(modifier = Modifier.padding(12.dp))
-        Button(
-            onClick = { /*TODO*/ },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFFF4500)
-            ),
+        Box(
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(bottom = 16.dp),
+                .weight(0.3f)
+                .background(Color.Transparent)
+        )
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Transparent),
+    ) {
+        Box(
+            modifier = Modifier
+                .weight(0.3f)
+                .background(Color.Transparent)
+        )
+        Card(
+            modifier = Modifier
+                .background(Color.Transparent)
+                .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                .weight(0.4f),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            ),
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.card),
-                contentDescription = stringResource(R.string.play),
-                Modifier.padding(4.dp)
-            )
-            Text(text = stringResource(R.string.booking), color = Color.White)
+            Column(modifier = Modifier.verticalScroll(enabled = true, state = ScrollState(0))) {
 
+                Ratings()
+                RatingSitesTitles()
+                Spacer(modifier = Modifier.padding(12.dp))
+                Text(
+                    text = stringResource(R.string.fantastic_beasts_the_secrets_of_dumbledore),
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.padding(12.dp))
+                Chips()
+                Spacer(modifier = Modifier.padding(12.dp))
+                FakeImageRow(fakeImages = fakeImages)
+                Spacer(modifier = Modifier.padding(12.dp))
+                Text(
+                    text = stringResource(R.string.fantastic_beasts_is_a_film_series_directed_by_david_yates_and_a_spin_off_prequel_to_the_harry_potter_novel_and_film_series_the_series_is_distributed_by_warner_bros_and_consists_of_three_fantasy_films_as_of_2022),
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = Modifier.padding(12.dp))
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFFF4500)
+                    ),
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(bottom = 16.dp),
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.card),
+                        contentDescription = stringResource(R.string.play),
+                        Modifier.padding(4.dp)
+                    )
+                    Text(text = stringResource(R.string.booking), color = Color.White)
+
+                }
+            }
         }
     }
 }
+
 
 @Composable
 private fun Chips() {
@@ -182,6 +215,7 @@ private fun Chips() {
         }
     }
 }
+
 @Composable
 private fun RatingSitesTitles() {
     Row {
@@ -217,15 +251,13 @@ private fun RatingSitesTitles() {
         }
     }
 }
+
 @Composable
 private fun Ratings() {
     Row(
         Modifier
             .fillMaxWidth()
-            .background(
-                Color.White,
-                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
-            )
+
     ) {
         Box(modifier = Modifier.weight(1f)) {
             Row {
@@ -278,6 +310,7 @@ private fun Ratings() {
         }
     }
 }
+
 val fakeImages = listOf(
     R.drawable.prince,
     R.drawable.images,
