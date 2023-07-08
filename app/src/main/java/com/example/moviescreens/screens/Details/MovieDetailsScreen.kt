@@ -1,6 +1,6 @@
 package com.example.moviescreens.screens
 
-import FakeImageList
+import FakeImageRow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -97,97 +97,8 @@ fun MovieDetailsScreen() {
                 )
             }
         }
-
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .background(
-                    Color.White,
-                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
-                )
-        ) {
-            Box(modifier = Modifier.weight(1f)) {
-                Row {
-                    Text(
-                        text = stringResource(R.string._6_4),
-                        color = Color.Black,
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(top = 32.dp, start = 32.dp)
-                    )
-
-                    Text(
-                        text = stringResource(R.string._10),
-                        color = Color.Gray,
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(top = 32.dp)
-                    )
-                }
-            }
-
-            Box(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string._63),
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    modifier = Modifier
-                        .padding(top = 32.dp)
-                        .align(Alignment.Center)
-                )
-            }
-            Box(modifier = Modifier.weight(1f)) {
-                Row {
-                    Text(
-                        text = "4/",
-                        color = Color.Black,
-                        fontSize = 18.sp,
-                        modifier = Modifier
-                            .padding(top = 32.dp, start = 48.dp)
-
-                    )
-
-                    Text(
-                        text = "10",
-                        color = Color.Gray,
-                        fontSize = 18.sp,
-                        modifier = Modifier
-                            .padding(top = 32.dp)
-                            .align(Alignment.CenterVertically)
-                    )
-                }
-            }
-        }
-        Row {
-            Box(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string.imbd),
-                    color = Color.Gray,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding(top = 8.dp, start = 42.dp)
-
-                )
-            }
-            Box(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string.rottentomatoes),
-                    color = Color.Gray,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .align(Alignment.Center)
-                )
-            }
-            Box(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string.ign),
-                    color = Color.Gray,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding(top = 8.dp, end = 54.dp)
-                        .align(Alignment.TopEnd)
-                )
-            }
-        }
+        Ratings()
+        RatingSitesTitles()
         Spacer(modifier = Modifier.padding(12.dp))
         Text(
             text = stringResource(R.string.fantastic_beasts_the_secrets_of_dumbledore),
@@ -195,52 +106,10 @@ fun MovieDetailsScreen() {
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.padding(12.dp))
-        Row(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            Arrangement.spacedBy(8.dp)
-        ) {
-            Box {
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier.height(32.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
-                    ),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                    elevation = ButtonDefaults.buttonElevation(4.dp),
-                )
-                {
-                    Text(
-                        text = stringResource(R.string.fantasy),
-                        color = Color.Black,
-                        fontSize = 14.sp,
-                    )
-                }
-            }
-            Box {
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier.height(32.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
-                    ),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-
-                    elevation = ButtonDefaults.buttonElevation(4.dp),
-                )
-                {
-                    Text(
-                        text = stringResource(R.string.action_text),
-                        color = Color.Black,
-                        fontSize = 14.sp,
-                    )
-                }
-            }
-        }
+        Chips()
         Spacer(modifier = Modifier.padding(12.dp))
-        FakeImageList(fakeImages = fakeImages)
+        FakeImageRow(fakeImages = fakeImages)
         Spacer(modifier = Modifier.padding(12.dp))
-
         Text(
             text = stringResource(R.string.fantastic_beasts_is_a_film_series_directed_by_david_yates_and_a_spin_off_prequel_to_the_harry_potter_novel_and_film_series_the_series_is_distributed_by_warner_bros_and_consists_of_three_fantasy_films_as_of_2022),
             fontSize = 12.sp,
@@ -268,6 +137,147 @@ fun MovieDetailsScreen() {
     }
 }
 
+@Composable
+private fun Chips() {
+    Row(
+        modifier = Modifier.padding(start = 110.dp),
+        Arrangement.spacedBy(8.dp)
+    ) {
+        Box {
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.height(32.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                ),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                elevation = ButtonDefaults.buttonElevation(4.dp),
+            )
+            {
+                Text(
+                    text = stringResource(R.string.fantasy),
+                    color = Color.Black,
+                    fontSize = 14.sp,
+                )
+            }
+        }
+        Box {
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.height(32.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                ),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+
+                elevation = ButtonDefaults.buttonElevation(4.dp),
+            )
+            {
+                Text(
+                    text = stringResource(R.string.action_text),
+                    color = Color.Black,
+                    fontSize = 14.sp,
+                )
+            }
+        }
+    }
+}
+@Composable
+private fun RatingSitesTitles() {
+    Row {
+        Box(modifier = Modifier.weight(1f)) {
+            Text(
+                text = stringResource(R.string.imbd),
+                color = Color.Gray,
+                fontSize = 12.sp,
+                modifier = Modifier
+                    .padding(top = 8.dp, start = 42.dp)
+
+            )
+        }
+        Box(modifier = Modifier.weight(1f)) {
+            Text(
+                text = stringResource(R.string.rottentomatoes),
+                color = Color.Gray,
+                fontSize = 12.sp,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .align(Alignment.Center)
+            )
+        }
+        Box(modifier = Modifier.weight(1f)) {
+            Text(
+                text = stringResource(R.string.ign),
+                color = Color.Gray,
+                fontSize = 12.sp,
+                modifier = Modifier
+                    .padding(top = 8.dp, end = 54.dp)
+                    .align(Alignment.TopEnd)
+            )
+        }
+    }
+}
+@Composable
+private fun Ratings() {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .background(
+                Color.White,
+                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+            )
+    ) {
+        Box(modifier = Modifier.weight(1f)) {
+            Row {
+                Text(
+                    text = stringResource(R.string._6_4),
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(top = 32.dp, start = 32.dp)
+                )
+
+                Text(
+                    text = stringResource(R.string._10),
+                    color = Color.Gray,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(top = 32.dp)
+                )
+            }
+        }
+
+        Box(modifier = Modifier.weight(1f)) {
+            Text(
+                text = stringResource(R.string._63),
+                color = Color.Black,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .padding(top = 32.dp)
+                    .align(Alignment.Center)
+            )
+        }
+        Box(modifier = Modifier.weight(1f)) {
+            Row {
+                Text(
+                    text = "4/",
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                        .padding(top = 32.dp, start = 48.dp)
+
+                )
+
+                Text(
+                    text = "10",
+                    color = Color.Gray,
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                        .padding(top = 32.dp)
+                        .align(Alignment.CenterVertically)
+                )
+            }
+        }
+    }
+}
 val fakeImages = listOf(
     R.drawable.prince,
     R.drawable.images,

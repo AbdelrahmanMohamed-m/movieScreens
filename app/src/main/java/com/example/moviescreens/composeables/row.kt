@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.moviescreens.R
 
 @Composable
-fun FakeImageList(fakeImages: List<Int>) {
+fun FakeImageRow(fakeImages: List<Int>) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(horizontal = 16.dp),
@@ -55,5 +55,5 @@ fun FakeImageListPreview() {
         R.drawable.catchme,
         R.drawable.catchme,
     )
-    FakeImageList(fakeImages)
+    FakeImageRow(fakeImages)
 }
