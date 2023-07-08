@@ -32,7 +32,10 @@ fun MovieBackGround(
             modifier = Modifier
                 .fillMaxSize()
                 .zIndex(1F)
-                .background(brush = Brush.verticalGradient(listOf(Color.Transparent, color)))
+                .background(brush = Brush.verticalGradient(listOf(Color.Transparent, color),
+                    startY = 0F,
+                    endY = 500F)
+                )
         )
     }
 }

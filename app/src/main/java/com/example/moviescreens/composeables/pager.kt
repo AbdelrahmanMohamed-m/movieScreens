@@ -4,49 +4,69 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.ScaleFactor
+import androidx.compose.ui.layout.lerp
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.moviescreens.R
+import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalFoundationApi::class)
-@Preview
 @Composable
-fun pager() {
+fun pager(
+    data: List<Int>,
+    modifier: Modifier = Modifier,
+    state: PagerState
+) {
     HorizontalPager(
-        pageCount = pages.size,
-        contentPadding = PaddingValues(start = 32.dp, end = 32.dp),
-        pageSpacing = 16.dp,
-
-    ) { page ->
+        pageCount = data.size,
+        state = state,
+        modifier = modifier.wrapContentSize(),
+        contentPadding = PaddingValues(horizontal = 48.dp, vertical = 16.dp)
+    ) { pageIndex ->
         Card(
-            modifier = Modifier
-                .aspectRatio(4f / 5f).graphicsLayer {
-                    val pageOffset =(PagerState)
-
+            colors = CardDefaults.cardColors(Color.Transparent),
+            modifier = modifier
+                .graphicsLayer {
+                    val pageOffset =
+                        ((state.currentPage - pageIndex) + state.currentPageOffsetFraction).absoluteValue
+                    lerp(
+                        start = ScaleFactor(0.85F, 0.85F),
+                        stop = ScaleFactor(1F, 1F),
+                        fraction = 1F - pageOffset.coerceIn(0F, 1F)
+                    ).also { scale ->
+                        scaleX = scale.scaleX
+                        scaleY = scale.scaleY
+                    }
                 }
-
+                .clip(RoundedCornerShape(32.dp))
+                .fillMaxWidth()
+                .aspectRatio(0.7F),
         ) {
+            val painter = painterResource(id = data[pageIndex])
+
             Image(
-                modifier = Modifier.fillMaxSize(),
+                painter = painter,
+                contentDescription = "Movie Image",
                 contentScale = ContentScale.Crop,
-                painter = painterResource(pages[page]),
-                contentDescription = "pics"
+                modifier = modifier.fillMaxWidth()
             )
         }
     }
 }
 
-    val pages = listOf(
-        R.drawable.mage,
-        R.drawable.beat,
-        R.drawable.aqua,
-    )
+
+

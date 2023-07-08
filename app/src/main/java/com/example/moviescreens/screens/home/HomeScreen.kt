@@ -2,11 +2,15 @@ package com.example.moviescreens.screens.home
 
 import HomeViewModel
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -46,68 +50,67 @@ fun HomeDetails(
     state: HomeUiState,
     pagerState: PagerState
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Box(
 
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(0.6f)
-        ) {
-            MovieBackGround(
-                data = state.movieImages[pagerState.currentPage],
-                color = Color.White
-            )
-        }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()   ) {
 
-        Row(
-            Modifier.padding(top = 48.dp, start = 40.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            TopChips(
-                text = "Now Showing",
-                onSelectedChipChanged = {})
-            TopChips(
-                text = "Now Showing",
-                onSelectedChipChanged = {},
-                isSelected = true
-            )
-        }
-
-        pager(
-            data = state.movieImages,
-            state = pagerState
+        MovieBackGround(
+            data = state.movieImages[pagerState.currentPage],
+            color = Color.White
         )
-        Row(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            Arrangement.spacedBy(8.dp)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
         ) {
-            Watch()
+            Row(
+                Modifier.padding(top = 48.dp, start = 40.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+
+                TopChips(
+                    text = stringResource(R.string.now_showing),
+                    onSelectedChipChanged = {})
+                TopChips(
+                    text = stringResource(R.string.coming_soon),
+                    onSelectedChipChanged = {},
+                    isSelected = true
+                )
+            }
+
+            pager(
+                data = state.movieImages,
+                state = pagerState
+            )
+            Row(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                Arrangement.spacedBy(8.dp)
+            ) {
+                Watch()
+            }
+            spacer16()
+
+            Text(
+                text = stringResource(R.string.fantastic_beasts_the_secrets_of_dumbledore),
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center
+            )
+            spacer16()
+
+            Row(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                Arrangement.spacedBy(8.dp)
+            ) {
+                GenreButton()
+            }
+            spacer16()
+            bottombarItem()
+
         }
-        spacer16()
-
-        Text(
-            text = stringResource(R.string.fantastic_beasts_the_secrets_of_dumbledore),
-            fontSize = 24.sp,
-            textAlign = TextAlign.Center
-        )
-        spacer16()
-
-        Row(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            Arrangement.spacedBy(8.dp)
-        ) {
-            GenreButton()
-        }
-        spacer16()
-        bottombarItem()
-
     }
-}
 
+}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

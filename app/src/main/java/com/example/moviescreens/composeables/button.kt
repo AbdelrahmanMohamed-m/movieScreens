@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.stringResource
@@ -79,7 +80,7 @@ fun TopChips(
         shadowElevation = 0.dp,
         shape = MaterialTheme.shapes.extraLarge,
         color = if (isSelected) Transparent else Color(0xFFFA1616),
-        border = if (isSelected) BorderStroke(width = 1.dp, color = LightGray) else BorderStroke(width = 0.dp, color = Transparent)
+        border = if (isSelected) BorderStroke(width = 1.dp, color = Black) else BorderStroke(width = 0.dp, color = Transparent)
     ) {
         Row(
             modifier = Modifier
