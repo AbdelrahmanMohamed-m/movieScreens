@@ -1,6 +1,5 @@
 package com.example.moviescreens.screens.home
 
-import HomeViewModel
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,12 +16,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.moviescreens.R
 import com.example.moviescreens.composeables.GenreButton
 import com.example.moviescreens.composeables.MovieBackGround
@@ -34,22 +35,31 @@ import com.example.moviescreens.composeables.spacer16
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(
+    navController: NavHostController,
+    viewModel: HomeViewModel = hiltViewModel(),
+
+    ) {
     val state by viewModel.state.collectAsState()
     val pagerState = rememberPagerState(initialPage = 1)
-    HomeDetails(state = state, pagerState = pagerState)
+    HomeDetails(state = state, pagerState = pagerState,
+        onclick = {
+            navController.navigate("MovieDetailsScreen")
+        })
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeDetails(
     state: HomeUiState,
-    pagerState: PagerState
+    pagerState: PagerState,
+    onclick: () -> Unit
 ) {
 
     Box(
         modifier = Modifier
-            .fillMaxSize()   ) {
+            .fillMaxSize()
+    ) {
 
         MovieBackGround(
             data = state.movieImages[pagerState.currentPage],
@@ -77,7 +87,8 @@ fun HomeDetails(
 
             pager(
                 data = state.movieImages,
-                state = pagerState
+                state = pagerState,
+                onclick = {onclick()}
             )
             Row(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -111,7 +122,10 @@ fun HomeDetails(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewHomeScreen() {
-    HomeScreen()
+    HomeScreen(
+        viewModel = HomeViewModel(),
+        navController = NavHostController(LocalContext.current)
+    )
 }
 
 

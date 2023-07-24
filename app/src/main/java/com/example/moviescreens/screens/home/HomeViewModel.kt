@@ -1,6 +1,7 @@
+package com.example.moviescreens.screens.home
+
 import androidx.lifecycle.ViewModel
 import com.example.moviescreens.R
-import com.example.moviescreens.screens.home.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

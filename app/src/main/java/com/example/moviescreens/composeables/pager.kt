@@ -2,6 +2,7 @@ package com.example.moviescreens.composeables
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,16 +12,15 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.ScaleFactor
 import androidx.compose.ui.layout.lerp
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlin.math.absoluteValue
 
@@ -29,7 +29,8 @@ import kotlin.math.absoluteValue
 fun pager(
     data: List<Int>,
     modifier: Modifier = Modifier,
-    state: PagerState
+    state: PagerState,
+    onclick: () -> Unit
 ) {
     HorizontalPager(
         pageCount = data.size,
@@ -39,7 +40,7 @@ fun pager(
     ) { pageIndex ->
         Card(
             colors = CardDefaults.cardColors(Color.Transparent),
-            modifier = modifier
+            modifier = modifier.clickable { onclick() }
                 .graphicsLayer {
                     val pageOffset =
                         ((state.currentPage - pageIndex) + state.currentPageOffsetFraction).absoluteValue

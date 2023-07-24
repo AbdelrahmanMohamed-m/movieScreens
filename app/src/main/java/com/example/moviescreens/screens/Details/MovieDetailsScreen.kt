@@ -31,16 +31,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import card
 import com.example.moviescreens.R
 import com.example.moviescreens.composeables.blurredIcon
 
-@Preview
 @Composable
-fun MovieDetailsScreen() {
+fun MovieDetailsScreen(
+    NavController: NavController,
+) {
     card()
 
     Column(modifier = Modifier.fillMaxSize())
@@ -148,7 +149,9 @@ fun MovieDetailsScreen() {
                 )
                 Spacer(modifier = Modifier.padding(12.dp))
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        NavController.navigate("TicketScreen")
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFFFF4500)
                     ),
